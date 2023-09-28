@@ -27,7 +27,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-#define calibration_factor 15870.0 //This value is obtained using the SparkFun_HX711_Calibration sketch
+#define calibration_factor 15890.0 //This value is obtained using the SparkFun_HX711_Calibration sketch
 
 #define LOADCELL_DOUT_PIN  3
 #define LOADCELL_SCK_PIN  2
@@ -40,7 +40,7 @@
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-void displayWeight(int weight, int maxWeight){
+void displayWeight(float weight, float maxWeight){
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -65,7 +65,7 @@ void displayWeight(int weight, int maxWeight){
 }
 
 HX711 scale;
-float maxWeight = 0.0; // Variable to store the maximum weight
+float maxWeight = 0.00; // Variable to store the maximum weight
 
 void setup() {
   Serial.begin(9600);
@@ -94,10 +94,10 @@ void loop() {
   }
 
   Serial.print("Reading: ");
-  Serial.print(currentWeight, 2); // Display the current weight
+  Serial.print(currentWeight); // Display the current weight
   Serial.print(" kg");
   Serial.print(" Max Weight: ");
-  Serial.print(maxWeight, 2); // Display the maximum weight
+  Serial.print(maxWeight); // Display the maximum weight
   Serial.println();
 
   displayWeight(currentWeight, maxWeight); 
